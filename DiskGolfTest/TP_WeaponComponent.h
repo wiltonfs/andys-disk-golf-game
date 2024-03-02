@@ -16,7 +16,7 @@ class DISKGOLFTEST_API UTP_WeaponComponent : public USkeletalMeshComponent
 public:
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)
-	TSubclassOf<class ADiskGolfTestProjectile> ProjectileClass;
+	TSubclassOf<class AActor> ProjectileClass;
 
 	/** Sound to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
