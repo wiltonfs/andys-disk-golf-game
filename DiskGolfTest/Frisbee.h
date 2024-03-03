@@ -10,14 +10,32 @@
 
 #include "Frisbee.generated.h"
 
+USTRUCT(BlueprintType)
+struct FFrisbeeThrow
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite)
+	FTransform Transform;
+
+	UPROPERTY(BlueprintReadWrite)
+	float InitialSpeed;
+
+	UPROPERTY(BlueprintReadWrite)
+	float AngularVelocity;
+};
+
 UCLASS()
 class DISKGOLFTEST_API AFrisbee : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
+public:
 	// Sets default values for this actor's properties
 	AFrisbee();
+
+	// Constructor that takes a FFrisbeeThrow parameter
+	AFrisbee(const FFrisbeeThrow& FrisbeeThrow);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UProjectileMovementComponent* ProjectileMovementComponent;
