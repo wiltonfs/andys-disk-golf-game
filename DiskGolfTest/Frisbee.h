@@ -16,13 +16,16 @@ struct FFrisbeeThrow
 	GENERATED_BODY()
 
 	UPROPERTY(BlueprintReadWrite)
-	FTransform Transform;
+	FTransform Transform; // position and orientation of the frisbee
 
 	UPROPERTY(BlueprintReadWrite)
-	float InitialSpeed;
+	float ThrowVelocity; // in cm per second
 
 	UPROPERTY(BlueprintReadWrite)
-	float AngularVelocity;
+	float SpinVelocity; // in radians per second
+
+	UPROPERTY(BlueprintReadWrite)
+	float StartingRollAngle; // in degrees
 };
 
 UCLASS()
@@ -33,9 +36,6 @@ class DISKGOLFTEST_API AFrisbee : public AActor
 public:
 	// Sets default values for this actor's properties
 	AFrisbee();
-
-	// Constructor that takes a FFrisbeeThrow parameter
-	AFrisbee(const FFrisbeeThrow& FrisbeeThrow);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UProjectileMovementComponent* ProjectileMovementComponent;
@@ -63,6 +63,10 @@ public:
 	/** called when projectile hits something */
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	// Starts a new Frisbee throw
+	UFUNCTION(BlueprintCallable, Category = "Frisbee")
+	void StartThrow(FFrisbeeThrow ThrowParams);
 
 	/** Returns CollisionComp subobject **/
 	UCapsuleComponent* GetCollisionComp() const { return ColliderComponent; }
