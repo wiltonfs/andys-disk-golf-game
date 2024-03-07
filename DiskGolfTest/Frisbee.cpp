@@ -69,8 +69,6 @@ void AFrisbee::StartThrow(FFrisbeeThrow ThrowParams)
 	ProjectileMovementComponent->Velocity = ThrowParams.Transform.GetRotation().GetForwardVector() * ThrowParams.ThrowVelocity;
 	ProjectileMovementComponent->InitialSpeed = 0.0f;
 	
-	// TODO: Once the frisbee stops moving, something is stopping it from moving again, even when re-thrown
-	
 	// Set the frisbee's initial angular velocity (spin)
 	FVector SpinAxis = ThrowParams.Transform.GetRotation().GetUpVector();
 	FRotator SpinRotation = FRotator(0.0f, 0.0f, FMath::RadiansToDegrees(ThrowParams.SpinVelocity));
@@ -80,5 +78,10 @@ void AFrisbee::StartThrow(FFrisbeeThrow ThrowParams)
 	FRotator NewRotation = GetActorRotation();
 	NewRotation.Roll = ThrowParams.StartingRollAngle;
 	SetActorRotation(NewRotation);
+
+	// Re-activate the simulation
+	ProjectileMovementComponent->SetUpdatedComponent(RootComponent);
+	ProjectileMovementComponent->bSimulationEnabled = true;
+	ProjectileMovementComponent->Activate();
 }
 
