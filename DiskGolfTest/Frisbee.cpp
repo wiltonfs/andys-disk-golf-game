@@ -36,6 +36,7 @@ AFrisbee::AFrisbee()
 	// Set default values for blueprint-accessible parameters
 	DragCoefficient = 0.1f;
 	LiftCoefficient = 0.05f;
+	bRealThrow = false;
 }
 
 // Called when the game starts or when spawned
@@ -63,8 +64,10 @@ void AFrisbee::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiv
 	}
 }
 
-void AFrisbee::StartThrow(FFrisbeeThrow ThrowParams)
+void AFrisbee::StartThrow(FFrisbeeThrow ThrowParams, bool bIsRealThrow)
 {
+	bRealThrow = bIsRealThrow;
+
 	// Reset the frisbee's position and velocity
 	SetActorTransform(ThrowParams.Transform);
 	ProjectileMovementComponent->Velocity = ThrowParams.Transform.GetRotation().GetForwardVector() * ThrowParams.ThrowVelocity;

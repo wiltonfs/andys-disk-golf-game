@@ -52,6 +52,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Frisbee Parameters")
 	float LiftCoefficient;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Frisbee Parameters")
+	bool bRealThrow;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -66,7 +69,7 @@ public:
 
 	// Starts a new Frisbee throw
 	UFUNCTION(BlueprintCallable, Category = "Frisbee")
-	void StartThrow(FFrisbeeThrow ThrowParams);
+	void StartThrow(FFrisbeeThrow ThrowParams, bool bIsRealThrow = true);
 
 	/** Returns CollisionComp subobject **/
 	UCapsuleComponent* GetCollisionComp() const { return ColliderComponent; }
