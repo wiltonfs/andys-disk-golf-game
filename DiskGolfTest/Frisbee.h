@@ -71,6 +71,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Frisbee")
 	void StartThrow(FFrisbeeThrow ThrowParams, bool bIsRealThrow = true);
 
+	// Starts a new Frisbee throw
+	UFUNCTION(BlueprintCallable, Category = "Frisbee")
+	void ResetFrisbee();
+
 	/** Returns CollisionComp subobject **/
 	UCapsuleComponent* GetCollisionComp() const { return ColliderComponent; }
 

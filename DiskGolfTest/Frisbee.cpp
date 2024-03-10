@@ -23,8 +23,6 @@ AFrisbee::AFrisbee()
 	// Set up the Projectile Movement Component
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
 	ProjectileMovementComponent->SetUpdatedComponent(RootComponent);
-	ProjectileMovementComponent->InitialSpeed = 0.0f; // Launch speed
-	ProjectileMovementComponent->Velocity = FVector::ZeroVector;
 	ProjectileMovementComponent->MaxSpeed = 5000.f;
 	ProjectileMovementComponent->bRotationFollowsVelocity = false;
 	ProjectileMovementComponent->bShouldBounce = true;
@@ -36,7 +34,9 @@ AFrisbee::AFrisbee()
 	// Set default values for blueprint-accessible parameters
 	DragCoefficient = 0.1f;
 	LiftCoefficient = 0.05f;
-	bRealThrow = false;
+	
+	// Reset velocity and angle
+	ResetFrisbee();
 }
 
 // Called when the game starts or when spawned
@@ -64,14 +64,27 @@ void AFrisbee::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiv
 	}
 }
 
+void AFrisbee::ResetFrisbee()
+{
+	ProjectileMovementComponent->InitialSpeed = 0.0f;
+	ProjectileMovementComponent->Velocity = FVector::ZeroVector;
+	bRealThrow = false;
+
+	// Reset the frisbee's rotation
+	FRotator NewRotation = FRotator::ZeroRotator;
+	SetActorRotation(NewRotation);
+
+}
+
 void AFrisbee::StartThrow(FFrisbeeThrow ThrowParams, bool bIsRealThrow)
 {
+	ResetFrisbee();
+
 	bRealThrow = bIsRealThrow;
 
 	// Reset the frisbee's position and velocity
 	SetActorTransform(ThrowParams.Transform);
 	ProjectileMovementComponent->Velocity = ThrowParams.Transform.GetRotation().GetForwardVector() * ThrowParams.ThrowVelocity;
-	ProjectileMovementComponent->InitialSpeed = 0.0f;
 	
 	// Set the frisbee's initial angular velocity (spin)
 	FVector SpinAxis = ThrowParams.Transform.GetRotation().GetUpVector();
