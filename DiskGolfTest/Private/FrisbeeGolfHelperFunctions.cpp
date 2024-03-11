@@ -1,9 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Felix Wilton 2024
 
 
 #include "FrisbeeGolfHelperFunctions.h"
 
-FString UFrisbeeGolfHelperFunctions::GetScoreStringDisplay(int32 strokes, int32 parStrokes)
+FString UFrisbeeGolfHelperFunctions::GetScoreStringDisplay(int64 strokes, int64 parStrokes)
 {
 	if (strokes == 1) {
 		return "Hole in one!";
