@@ -23,7 +23,7 @@ AFrisbee::AFrisbee()
 	// Set up the Projectile Movement Component
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
 	ProjectileMovementComponent->SetUpdatedComponent(RootComponent);
-	ProjectileMovementComponent->MaxSpeed = 5000.f;
+	ProjectileMovementComponent->MaxSpeed = 10000.f;
 	ProjectileMovementComponent->bRotationFollowsVelocity = false;
 	ProjectileMovementComponent->bShouldBounce = true;
 
