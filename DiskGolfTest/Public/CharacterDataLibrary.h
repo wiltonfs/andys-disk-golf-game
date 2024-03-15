@@ -19,6 +19,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Golf Characters")
 	static FSelectableCharacter GetCharacterData(EUnlockableCharacters Character);
 
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Golf Characters")
+	static FString SkillToString(ECharacterSkills Skill);
+
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Golf Characters")
 	static float TimeToPower(float Time, bool bHasStrengthAbility);

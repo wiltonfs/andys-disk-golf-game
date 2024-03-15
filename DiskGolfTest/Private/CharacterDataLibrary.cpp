@@ -55,7 +55,33 @@ float UCharacterDataLibrary::TimeToPower(float Time, bool bHasStrengthAbility)
 
 
 
+FString UCharacterDataLibrary::SkillToString(ECharacterSkills Skill)
+{
+	FString SkillString;
+	switch (Skill)
+	{
+	case ECharacterSkills::SPEED:
+		SkillString = FString("Super Speedy: move quickly around the golf course.");
+		break;
+	case ECharacterSkills::STRENGTH:
+		SkillString = FString("Incredible Strength: throw the frisbee faster, and farther.");
+		break;
+	case ECharacterSkills::WATERPROOF:
+		SkillString = FString("Waterproof: physically unaffected by water.");
+		break;
+	case ECharacterSkills::VISION:
+		SkillString = FString("Disk Vision: predict the behavior of the frisbee.");
+		break;
+	case ECharacterSkills::RETHROW:
+		SkillString = FString("Rethrow: press L once per hole to re-throw.");
+		break;
+	default:
+		SkillString = FString("This is not a know skill..");
+		break;
+	}
 
+	return SkillString;
+}
 
 
 
@@ -67,11 +93,6 @@ FSelectableCharacter UCharacterDataLibrary::GetCharacterData(EUnlockableCharacte
 	CharacterData.CharacterEnum = Character;
 	CharacterData.CharacterName = "";
 	CharacterData.CharacterDesc = "";
-	CharacterData.bSpeedAbility = false;
-	CharacterData.bStrengthAbility = false;
-	CharacterData.bWaterAbility = false;
-	CharacterData.bTrajectoryAbility = false;
-	CharacterData.bRethrowAbility = false;
 
 	// Update character data based on the selected character
 	switch (Character)
@@ -79,65 +100,65 @@ FSelectableCharacter UCharacterDataLibrary::GetCharacterData(EUnlockableCharacte
 	case EUnlockableCharacters::ANDY:
 		CharacterData.CharacterName = "Andy";
 		CharacterData.CharacterDesc = "This isn't Andy's first time playing disk golf. And he loves to play in the water!";
-		CharacterData.bWaterAbility = true;
-		CharacterData.bTrajectoryAbility = true;
+		CharacterData.Skills.Add(ECharacterSkills::WATERPROOF);
+		CharacterData.Skills.Add(ECharacterSkills::VISION);
 		break;
 	case EUnlockableCharacters::RENEA:
 		CharacterData.CharacterName = "Renea";
 		CharacterData.CharacterDesc = "She's never afraid to get muddy or wet, and she's new enough to the game to get some special treatment.";
-		CharacterData.bWaterAbility = true;
-		CharacterData.bRethrowAbility = true;
+		CharacterData.Skills.Add(ECharacterSkills::WATERPROOF);
+		CharacterData.Skills.Add(ECharacterSkills::RETHROW);
 		break;
 	case EUnlockableCharacters::KATARINA:
 		CharacterData.CharacterName = "Katarina";
 		CharacterData.CharacterDesc = "Katarina has spent years training to be the fastest runner on the disk golf course. If you give her a re-throw here and there, you can be sure she'll finish a game quickly.";
-		CharacterData.bSpeedAbility = true;
-		CharacterData.bRethrowAbility = true;
+		CharacterData.Skills.Add(ECharacterSkills::SPEED);
+		CharacterData.Skills.Add(ECharacterSkills::RETHROW);
 		break;
 	case EUnlockableCharacters::FELIX:
 		CharacterData.CharacterName = "Felix";
 		CharacterData.CharacterDesc = "Did you know the name Felix means strong and quick in Spanish?";
-		CharacterData.bSpeedAbility = true;
-		CharacterData.bStrengthAbility = true;
+		CharacterData.Skills.Add(ECharacterSkills::SPEED);
+		CharacterData.Skills.Add(ECharacterSkills::STRENGTH);
 		break;
 	case EUnlockableCharacters::ANIA:
 		CharacterData.CharacterName = "Ania";
-		CharacterData.CharacterDesc = "Did you know Poland invented disk golf? We'll if that's true, we'd better trust Ania's interpretation of the rules.";
-		CharacterData.bRethrowAbility = true;
-		CharacterData.bStrengthAbility = true;
+		CharacterData.CharacterDesc = "Did you know Poland invented disk golf? Well, if that's true, we'd better trust Ania's interpretation of the rules.";
+		CharacterData.Skills.Add(ECharacterSkills::RETHROW);
+		CharacterData.Skills.Add(ECharacterSkills::STRENGTH);
 		break;
 	case EUnlockableCharacters::ZARIAH:
 		CharacterData.CharacterName = "Zariah";
 		CharacterData.CharacterDesc = "Zariah has raced across much deeper rivers and ponds. This disk golf course should be a breeze.";
-		CharacterData.bSpeedAbility = true;
-		CharacterData.bWaterAbility = true;
+		CharacterData.Skills.Add(ECharacterSkills::SPEED);
+		CharacterData.Skills.Add(ECharacterSkills::WATERPROOF);
 		break;
 	case EUnlockableCharacters::ELIZABETH:
 		CharacterData.CharacterName = "Elizabeth";
-		CharacterData.CharacterDesc = "Elizabeth is mighty, and loves to wakeboard.";
-		CharacterData.bStrengthAbility = true;
-		CharacterData.bWaterAbility = true;
+		CharacterData.CharacterDesc = "Elizabeth is mighty and loves to wakeboard.";
+		CharacterData.Skills.Add(ECharacterSkills::STRENGTH);
+		CharacterData.Skills.Add(ECharacterSkills::WATERPROOF);
 		break;
 	case EUnlockableCharacters::JONATHAN:
 		CharacterData.CharacterName = "Jonathan";
 		CharacterData.CharacterDesc = "Decades of ultimate frisbee are finally paying off!";
-		CharacterData.bSpeedAbility = true;
-		CharacterData.bTrajectoryAbility = true;
+		CharacterData.Skills.Add(ECharacterSkills::SPEED);
+		CharacterData.Skills.Add(ECharacterSkills::VISION);
 		break;
 	case EUnlockableCharacters::SETH:
 		CharacterData.CharacterName = "Seth";
 		CharacterData.CharacterDesc = "A powerful arm that knows where to aim!";
-		CharacterData.bStrengthAbility = true;
-		CharacterData.bTrajectoryAbility = true;
+		CharacterData.Skills.Add(ECharacterSkills::STRENGTH);
+		CharacterData.Skills.Add(ECharacterSkills::VISION);
 		break;
 	case EUnlockableCharacters::CHUNKY:
 		CharacterData.CharacterName = "Chunky";
 		CharacterData.CharacterDesc = "Roughly half of Chunky's brain is dedicated to frisbee flight mechanics.";
-		CharacterData.bTrajectoryAbility = true;
-		CharacterData.bWaterAbility = true;
-		CharacterData.bSpeedAbility = true;
-		CharacterData.bRethrowAbility = true;
-		CharacterData.bStrengthAbility = true;
+		CharacterData.Skills.Add(ECharacterSkills::WATERPROOF);
+		CharacterData.Skills.Add(ECharacterSkills::VISION);
+		CharacterData.Skills.Add(ECharacterSkills::SPEED);
+		CharacterData.Skills.Add(ECharacterSkills::STRENGTH);
+		CharacterData.Skills.Add(ECharacterSkills::RETHROW);
 		break;
 	default:
 		// Handle default case if necessary
