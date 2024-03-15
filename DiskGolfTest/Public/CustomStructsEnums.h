@@ -6,6 +6,15 @@
 // ---------------------------------------------------------------- Golf Characters
 
 UENUM(BlueprintType)
+enum class ECharacterSkills : uint8 {
+	SPEED = 0 UMETA(DisplayName = "Speed"),
+	STRENGTH = 1 UMETA(DisplayName = "Strength"),
+	WATERPROOF = 2 UMETA(DisplayName = "Waterproof"),
+	VISION = 3 UMETA(DisplayName = "Disk Vision"),
+	RETHROW = 4 UMETA(DisplayName = "Rethrow")
+};
+
+UENUM(BlueprintType)
 enum class EUnlockableCharacters : uint8 {
 	ANDY = 0 UMETA(DisplayName = "Andy"),
 	RENEA = 1 UMETA(DisplayName = "Renea"),
@@ -36,25 +45,9 @@ struct FSelectableCharacter
 	UPROPERTY(BlueprintReadWrite)
 	FString CharacterDesc;
 
-	// Character speed
+	// Character skills
 	UPROPERTY(BlueprintReadWrite)
-	bool bSpeedAbility;
-
-	// Character strength
-	UPROPERTY(BlueprintReadWrite)
-	bool bStrengthAbility;
-
-	// Character can swim
-	UPROPERTY(BlueprintReadWrite)
-	bool bWaterAbility;
-
-	// Character can see trajectory
-	UPROPERTY(BlueprintReadWrite)
-	bool bTrajectoryAbility;
-
-	// Character can rethrow
-	UPROPERTY(BlueprintReadWrite)
-	bool bRethrowAbility;
+	TArray<ECharacterSkills> Skills;
 };
 
 
