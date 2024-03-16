@@ -43,14 +43,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UStaticMeshComponent* FrisbeeMeshComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UCapsuleComponent* ColliderComponent;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Frisbee Parameters")
 	float DragCoefficient;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Frisbee Parameters")
 	float LiftCoefficient;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Frisbee Parameters")
+	float SideCoefficient;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Frisbee Parameters")
+	float SpinValue;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Frisbee Parameters")
 	bool bRealThrow;
@@ -75,8 +78,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Frisbee")
 	void ResetFrisbee();
 
-	/** Returns CollisionComp subobject **/
-	UCapsuleComponent* GetCollisionComp() const { return ColliderComponent; }
+	/** Returns UStaticMeshComponent subobject **/
+	UStaticMeshComponent* GetStaticMesh() const { return FrisbeeMeshComponent; }
 
 	/** Returns ProjectileMovement subobject **/
 	UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovementComponent; }
