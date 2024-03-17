@@ -135,7 +135,7 @@ FSelectableCharacter UCharacterDataLibrary::GetCharacterData(EUnlockableCharacte
 		break;
 	case EUnlockableCharacters::ELIZABETH:
 		CharacterData.CharacterName = "Elizabeth";
-		CharacterData.CharacterDesc = "Elizabeth is mighty and loves to wakeboard.";
+		CharacterData.CharacterDesc = "Elizabeth is mighty and loves to wakeboard. Sometimes she throws a javelin, while wakeboaring!";
 		CharacterData.Skills.Add(ECharacterSkills::STRENGTH);
 		CharacterData.Skills.Add(ECharacterSkills::WATERPROOF);
 		break;
